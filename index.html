@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Pricing Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        input {
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 12px 20px;
+            cursor: pointer;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: 600;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Website Pricing Calculator</h2>
+        <p>Enter the amount you want to pay:</p>
+        <input type="number" id="payment" min="2" step="1" placeholder="Enter amount">
+        <button onclick="calculateWebsites()">Calculate</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculateWebsites() {
+            let payment = parseFloat(document.getElementById('payment').value);
+            if (isNaN(payment) || payment < 2) {
+                document.getElementById('result').innerText = "Please enter a valid amount (minimum $2).";
+                return;
+            }
+
+            let websites = Math.floor(payment / 2) + Math.floor(payment / 3);
+            let customDomains = payment >= 4 ? Math.floor((payment - 2) / 4) : 0;
+            let encryptedSites = payment >= 7 ? Math.floor((payment - 5) / 6) : 0;
+
+            document.getElementById('result').innerHTML = `
+                For $${payment}, you get:<br>
+                ${websites} website(s)<br>
+                ${customDomains} custom domain(s)<br>
+                ${encryptedSites} encrypted website(s)
+            `;
+        }
+    </script>
+</body>
+</html>
